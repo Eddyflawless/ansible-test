@@ -77,11 +77,18 @@ function get_pub_id(){
 }
 
 function copy_id_to_host() {
+
+    usage="Usage: $0 <key_name> <host> [passphrase] eg: $0 id_ednode 3.120.10.4"
    
+    if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "help" ]]; then
+        echo $usage
+        exit
+    fi
+
     id_key=$1
     host=$2
     host_password=$3
-    usage="Usage: $0 <key_name> <host> [passphrase] eg: $0 id_ednode 3.120.10.4"
+  
 
     if [[ $id_key != *.pub ]]; then
         echo "$id_key must be a public key type"
@@ -126,7 +133,7 @@ if [[ -z "$1" ]]; then
     exit
 fi
 
-command -v $1 || ( echo -e "$command doesnot exist")
+command -v $1 > /dev/null || die "$command doesnot exist"
 
 for x in "$@"; do
     command_str=$command_str" $x"

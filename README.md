@@ -1,6 +1,3 @@
-# ansible-test
-
-# useful commands
 
 ## ping all host specified in inventory
 ansible all -m ping
